@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var dataLoaded = false
+    
     var body: some View {
+        
+        
         VStack {
-            Text("Hello, world!")
+            if (dataLoaded) {
+                LoginScreen()
+            } else {
+                SplashScreen()
+            }
         }
-        .padding()
+        
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation {
+                    dataLoaded = true
+                }
+            }
+        }
+        
     }
 }
 
