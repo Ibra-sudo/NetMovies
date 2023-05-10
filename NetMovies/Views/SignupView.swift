@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignupScreen: View {
+struct SignupView: View {
     
     @State private var email: String = ""
     @State private var password: String = ""
@@ -59,7 +59,7 @@ struct SignupScreen: View {
                         )
                         .padding(.all, 30)
                     
-                    NavigationLink(destination: LoginScreen()) {
+                    NavigationLink(destination: LoginView()) {
                         Text("I have already an account? Sign In")
                             .font(.system(size: 20, weight: .heavy, design: .serif))
                             .foregroundColor(.white.opacity(0.6))
@@ -74,8 +74,8 @@ struct SignupScreen: View {
     }
 }
 
-struct SignupScreen_Previews: PreviewProvider {
+struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignupScreen()
+        SignupView()
     }
 }

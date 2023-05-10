@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct SearchViewController: View {
+struct SearchView: View {
     var body: some View {
         Text("Search")
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchViewController()
+        SearchView()
     }
 }

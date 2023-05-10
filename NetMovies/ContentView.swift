@@ -16,7 +16,8 @@ struct ContentView: View {
         
         VStack {
             if (dataLoaded) {
-                LoginScreen()
+//                LoginView()
+                HomeView()
             } else {
                 SplashScreen()
             }

@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct UpcomingViewController: View {
+struct UpcomingView: View {
     var body: some View {
         Text("Upcoming")
     }
 }
 
-struct UpcomingViewController_Previews: PreviewProvider {
+struct UpcomingView_Previews: PreviewProvider {
     static var previews: some View {
-        UpcomingViewController()
+        UpcomingView()
     }
 }

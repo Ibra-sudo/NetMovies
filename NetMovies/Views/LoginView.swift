@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-struct LoginScreen: View {
+struct LoginView: View {
     
     @State private var email: String = ""
     @State private var password: String = ""
@@ -49,7 +49,7 @@ struct LoginScreen: View {
                             .padding(.all, 30)
                     }
                     
-                    NavigationLink(destination: SignupScreen()) {
+                    NavigationLink(destination: SignupView()) {
                         Text("New to NetMovies? Sign up now.")
                             .font(.system(size: 20, weight: .heavy, design: .serif))
                             .foregroundColor(.white.opacity(0.6))
@@ -65,8 +65,8 @@ struct LoginScreen: View {
     }
 }
 
-struct LoginScreen_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginScreen()
+        LoginView()
     }
 }

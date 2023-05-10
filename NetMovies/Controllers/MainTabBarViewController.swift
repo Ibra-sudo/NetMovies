@@ -14,22 +14,22 @@ struct MainTabBarViewController: View {
     var body: some View {
         NavigationStack {
             TabView {
-                HomeViewController()
+                HomeView()
                     .tabItem({
                         Text("Home")
                         Image(systemName: "house")
                     }).tag(0)
-                UpcomingViewController()
+                UpcomingView()
                     .tabItem({
                         Text("Coming Soon")
                         Image(systemName: "play.circle")
                     }).tag(1)
-                SearchViewController()
+                SearchView()
                     .tabItem({
                         Text("Top Search")
                         Image(systemName: "magnifyingglass")
                     }).tag(2)
-                DownloadsViewController()
+                DownloadsView()
                     .tabItem({
                         Text("Downloads")
                         Image(systemName: "tray.and.arrow.down")

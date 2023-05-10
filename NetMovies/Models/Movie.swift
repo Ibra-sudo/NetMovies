@@ -9,17 +9,18 @@ import Foundation
 
 
 struct TrendingMoviesResponse: Codable {
-    let result: [Title]
+    var results: [Title]
 }
 
-struct Title: Codable {
-    let id: Int
-    let media_type: String
-    let original_name: String
-    let original_title: String
-    let poster_path: String
-    let overview: String
-    let vote_count: Int
-    let relase_date: String
-    let vote_average: Double
+struct Title: Codable, Identifiable {
+    var id: Int
+    var media_type: String?
+    var title: String?
+    var original_title: String?
+    var poster_path: String?
+    var overview: String?
+    var vote_count: Int
+    var relase_date: String?
+    var vote_average: Double
+    
 }
