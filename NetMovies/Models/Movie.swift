@@ -22,5 +22,4 @@ struct Title: Codable, Identifiable {
     var vote_count: Int
     var relase_date: String?
     var vote_average: Double
-    
 }
