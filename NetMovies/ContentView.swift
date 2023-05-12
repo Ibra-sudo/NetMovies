@@ -10,25 +10,29 @@ import SwiftUI
 struct ContentView: View {
     
     @State var dataLoaded = false
+    @StateObject var viewModel = FirebaseViewModel()
     
     var body: some View {
-        
-        
         VStack {
             if (dataLoaded) {
-//                LoginView()
-                HomeView()
+                if viewModel.signedIn {
+                    MainTabBarViewController().environmentObject(viewModel)
+                } else {
+                    LoginView()
+                        .environmentObject(viewModel)
+                }
             } else {
                 SplashScreen()
             }
         }
-        
         .onAppear {
+            viewModel.signedIn = viewModel.isSignedIn
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 withAnimation {
                     dataLoaded = true
                 }
             }
+            
         }
         
     }

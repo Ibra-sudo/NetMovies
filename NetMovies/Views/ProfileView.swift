@@ -9,13 +9,30 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    @EnvironmentObject var viewModel: FirebaseViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        Button(action: {
+            viewModel.signOut()
+        }) {
+            Text("Sign Out")
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .frame(width: 360, height: 30)
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray, lineWidth: 2)
+                )
+                
+        }
+        .padding(.top, 30)
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView().environmentObject(FirebaseViewModel())
     }
 }

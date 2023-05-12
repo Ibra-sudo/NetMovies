@@ -38,6 +38,8 @@
 		33DD54C82A0D2F9A00972388 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 33DD54C72A0D2F9A00972388 /* FirebaseFirestoreSwift */; };
 		33DD54CA2A0D2F9A00972388 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 33DD54C92A0D2F9A00972388 /* FirebaseStorage */; };
 		33DD54CC2A0D2F9A00972388 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 33DD54CB2A0D2F9A00972388 /* FirebaseStorageCombine-Community */; };
+		33DD54D32A0E335400972388 /* FirebaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD54D22A0E335400972388 /* FirebaseViewModel.swift */; };
+		33DD54D52A0E846F00972388 /* SearchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD54D42A0E846F00972388 /* SearchTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		3302A0D72A052A5100B87764 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		33DD54B62A09653300972388 /* TitleCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionView.swift; sourceTree = "<group>"; };
 		33DD54B82A0D2C3100972388 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		33DD54D22A0E335400972388 /* FirebaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseViewModel.swift; sourceTree = "<group>"; };
+		33DD54D42A0E846F00972388 /* SearchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				3302A0CF2A0515C000B87764 /* MoviesViewModel.swift */,
+				33DD54D22A0E335400972388 /* FirebaseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 				3302A0D52A052A3700B87764 /* ProfileView.swift */,
 				3302A0D72A052A5100B87764 /* PlayView.swift */,
 				33DD54B62A09653300972388 /* TitleCollectionView.swift */,
+				33DD54D42A0E846F00972388 /* SearchTest.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -279,9 +285,11 @@
 				3302A0BA2A02656800B87764 /* SplashScreen.swift in Sources */,
 				33DD54B72A09653300972388 /* TitleCollectionView.swift in Sources */,
 				3302A0C92A03E7AA00B87764 /* MainTabBarViewController.swift in Sources */,
+				33DD54D52A0E846F00972388 /* SearchTest.swift in Sources */,
 				3302A0C52A03E41400B87764 /* SearchView.swift in Sources */,
 				3302A0BF2A02927900B87764 /* SignupView.swift in Sources */,
 				3302A0D62A052A3700B87764 /* ProfileView.swift in Sources */,
+				33DD54D32A0E335400972388 /* FirebaseViewModel.swift in Sources */,
 				3302A0C12A03E3E100B87764 /* HomeView.swift in Sources */,
 				3302A0D02A0515C000B87764 /* MoviesViewModel.swift in Sources */,
 				3302A0D82A052A5100B87764 /* PlayView.swift in Sources */,
@@ -415,6 +423,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_SECURITY_KEYCHAIN_API = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NetMovies/Preview Content\"";
@@ -447,6 +456,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_SECURITY_KEYCHAIN_API = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NetMovies/Preview Content\"";

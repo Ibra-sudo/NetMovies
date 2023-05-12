@@ -39,7 +39,7 @@ struct HomeView: View {
                                                     image
                                                         .resizable()
                                                         .scaledToFit()
-                                                        .frame(width: 190, height: 280)
+                                                        .frame(width: 160, height: 240)
                                                         .cornerRadius(10)
                                             } placeholder: {
                                                 ProgressView()
@@ -52,7 +52,7 @@ struct HomeView: View {
                                                     image
                                                         .resizable()
                                                         .scaledToFit()
-                                                        .frame(width: 190, height: 280)
+                                                        .frame(width: 160, height: 240)
                                                         .cornerRadius(10)
                                             } placeholder: {
                                                 ProgressView()
@@ -65,7 +65,7 @@ struct HomeView: View {
                                                     image
                                                         .resizable()
                                                         .scaledToFit()
-                                                        .frame(width: 190, height: 280)
+                                                        .frame(width: 160, height: 240)
                                                         .cornerRadius(10)
                                             } placeholder: {
                                                 ProgressView()
@@ -78,7 +78,7 @@ struct HomeView: View {
                                                     image
                                                         .resizable()
                                                         .scaledToFit()
-                                                        .frame(width: 190, height: 280)
+                                                        .frame(width: 160, height: 240)
                                                         .cornerRadius(10)
                                             } placeholder: {
                                                 ProgressView()
@@ -91,7 +91,7 @@ struct HomeView: View {
                                                     image
                                                         .resizable()
                                                         .scaledToFit()
-                                                        .frame(width: 190, height: 280)
+                                                        .frame(width: 160, height: 240)
                                                         .cornerRadius(10)
                                             } placeholder: {
                                                 ProgressView()
@@ -109,6 +109,8 @@ struct HomeView: View {
                     }
                 }
             }
+//            .navigationTitle("NetMovies")
+//            .navigationBarTitleDisplayMode(.inline)
             .navigationBarTitle("NetMovies", displayMode: .inline)
             .navigationBarItems(
                 leading: Image("Logo")
@@ -126,7 +128,7 @@ struct HomeView: View {
                             .imageScale(.large)
                             .foregroundColor(.white)
                     }
-                    
+
                 }
             )
             

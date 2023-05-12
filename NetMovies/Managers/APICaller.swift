@@ -59,6 +59,7 @@ class ApiCaller: ObservableObject {
     @Published var upcomingMovies: [Title] = []
     @Published var popularMovies: [Title] = []
     @Published var topRatedMovies: [Title] = []
+    @Published var titles: [Title] = []
     
     func getTrendingMovies() {
         guard let url = URL(string: "\(Constants.base_url)/3/trending/movie/day?api_key=\(Constants.API_KEY)") else {
@@ -179,6 +180,29 @@ class ApiCaller: ObservableObject {
                 }
             } catch {
                 print("Wrong bei Decoden the response: \(APIError.faildTogetData)")
+            }
+        }
+        task.resume()
+    }
+    
+    func search(with query: String) {
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        guard let url = URL(string: "\(Constants.base_url)/3/search/movie?api_key=\(Constants.API_KEY)&query=\(query)") else {
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do {
+                let results = try JSONDecoder().decode(TrendingMoviesResponse.self, from: data)
+                DispatchQueue.main.async {
+                    self.titles = results.results
+                }
+            } catch {
+                print("Wrong bei searching: \(APIError.faildTogetData)")
             }
         }
         task.resume()
