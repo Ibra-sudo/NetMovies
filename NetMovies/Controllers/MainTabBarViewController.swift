@@ -12,7 +12,7 @@ struct MainTabBarViewController: View {
     @State private var selection: Int = 0
     
     var body: some View {
-        NavigationStack {
+//        NavigationStack {
             TabView {
                 HomeView()
                     .tabItem({
@@ -34,9 +34,9 @@ struct MainTabBarViewController: View {
                         Text("Downloads")
                         Image(systemName: "tray.and.arrow.down")
                     }).tag(3)
-            }
+            }.preferredColorScheme(.dark)
             
-        }.preferredColorScheme(.dark)
+//        }
     }
 }
 
