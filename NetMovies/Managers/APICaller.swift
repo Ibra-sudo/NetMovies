@@ -191,8 +191,9 @@ class ApiCaller: ObservableObject {
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+        let task = URLSession.shared.dataTask(with: url) { data, rsponse, error in
             guard let data = data, error == nil else {
+                print("Wrong with fitching the response: \(String(describing: error?.localizedDescription))")
                 return
             }
             
@@ -200,6 +201,7 @@ class ApiCaller: ObservableObject {
                 let results = try JSONDecoder().decode(TrendingMoviesResponse.self, from: data)
                 DispatchQueue.main.async {
                     self.titles = results.results
+//                    print(results)
                 }
             } catch {
                 print("Wrong bei searching: \(APIError.faildTogetData)")
