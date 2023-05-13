@@ -85,7 +85,15 @@ struct SearchView: View {
                 self.isEmptyList = false
             }
         }
-        
+        .onChange(of: text) { _ in
+            if text.isEmpty {
+                viewModel.getTrendingMovies()
+                self.isEmptyList = true
+            } else {
+                viewModel.search(with: text)
+                self.isEmptyList = false
+            }
+        }
     }
 }
 
