@@ -27,7 +27,7 @@ struct HomeView: View {
                 HeaderView()
                 VStack(alignment: .leading) {
                     ForEach(0..<sectionTitles.count, id: \.self) { index in
-                        Section(header: Text(sectionTitles[index].uppercased())){
+                        Section(header: Text(sectionTitles[index].capitalized)){
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 10) {
                                     

@@ -12,6 +12,8 @@ import UIKit
 struct Constants {
     static let API_KEY = "690ecb27ce9f8e42b368dfe2711ee116"
     static let base_url = "https://api.themoviedb.org"
+    static let youtube_API_KEY = "AIzaSyDaOIyZjCWyo29ifMCMvQdlIBsTptCO0FY"
+    static let youtube_base_url = "https://youtube.googleapis.com/youtube/v3/search?"
 }
 
 enum APIError: Error {
@@ -22,36 +24,9 @@ enum APIError: Error {
 
 class ApiCaller: ObservableObject {
     
-    static let shared = ApiCaller()
-    
-//    let persistentContainer: NSPersistentContainer
-    
-//    init() {
-//        persistentContainer = NSPersistentContainer(name: "")
-//        persistentContainer.loadPersistentStores { description, error in
-//            if let error = error {
-//                fatalError("Wrong with fetch ViewModels: \(error.localizedDescription)")
-//            }
-//        }
-//    }
-    
     init() {
-        
 //        getTrendingMovies()
-//        getTrendingTvs() { _ in
-//
-//        }
-        
-//        let imageView = UIImageView()
-//
-//        downloadImage("https://image.tmdb.org/t/p/w500/") {
-//            image, urlString in
-//            if let imageObject = image {
-//                DispatchQueue.main.async {
-//                    imageView.image = imageObject
-//                }
-//            }
-//        }
+//        getYoutubeMovie(with: "Hulk")
     }
     
     @Published var trendingMovies: [Title] = []
@@ -60,6 +35,7 @@ class ApiCaller: ObservableObject {
     @Published var popularMovies: [Title] = []
     @Published var topRatedMovies: [Title] = []
     @Published var titles: [Title] = []
+    @Published var youtubeTitle: [VideoElement] = []
     
     func getTrendingMovies() {
         guard let url = URL(string: "\(Constants.base_url)/3/trending/movie/day?api_key=\(Constants.API_KEY)") else {
@@ -210,27 +186,28 @@ class ApiCaller: ObservableObject {
         task.resume()
     }
     
-    
-//    func downloadImage(_ urlString: String, completion: ((_ image: UIImage?, _ urlString: String?) -> ())?) {
-//        guard let url = URL(string: urlString) else {
-//            completion?(nil, urlString)
-//            return
-//        }
-//        URLSession.shared.dataTask(with: url) { data, _, error in
-//            if let error = error {
-//                print("error in downloader image: \(error)")
-//                completion?(nil, urlString)
-//                return
-//            }
-////            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-////                completion?(nil, urlString)
-////                return
-////            }
-//            if let data = data, let image = UIImage(data: data) {
-//                completion?(image, urlString)
-//                return
-//            }
-//            completion?(nil, urlString)
-//        }.resume()
-//    }
+    func getYoutubeMovie(with query: String) {
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        guard let url = URL(string: "\(Constants.youtube_base_url)q=\(query)&key=\(Constants.youtube_API_KEY)") else {
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, rsponse, error in
+            guard let data = data, error == nil else {
+                print("Wrong with fitching the response: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            
+            do {
+                let results = try JSONDecoder().decode(YoutubeSearchResponse.self, from: data)
+                DispatchQueue.main.async {
+                    self.youtubeTitle = results.items
+//                    print(results)
+                }
+            } catch {
+                print("Wrong bei searching: \(APIError.faildTogetData)")
+            }
+        }
+        task.resume()
+    }
 }

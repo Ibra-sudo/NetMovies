@@ -8,8 +8,45 @@
 import SwiftUI
 
 struct UpcomingView: View {
+    
+    @StateObject var viewModel = ApiCaller()
+    
     var body: some View {
-        Text("Upcoming")
+        NavigationStack {
+            VStack {
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        ForEach(viewModel.upcomingMovies) { title in
+                            HStack {
+                                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(title.poster_path ?? "")")){ image in
+                                        image
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 140, height: 210)
+                                            .cornerRadius(10)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                Text(title.title ?? "")
+                                    .padding()
+                                    .font(.title)
+                                    .frame(width: 150, height: 100)
+                                Spacer()
+                                Image(systemName: "play.circle")
+                                    .padding()
+                                    .font(.custom("", size: 42))
+                            }
+                            .frame(width: 360)
+                        }
+                    }.padding()
+                }
+            }
+            .navigationBarTitle("Upcoming")
+        }
+        .preferredColorScheme(.dark)
+        .onAppear {
+            viewModel.getUpcomingMovies()
+        }
     }
 }
 

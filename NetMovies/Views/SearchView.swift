@@ -48,9 +48,7 @@ struct SearchView: View {
                                 .frame(width: 360)
                             }
                         }.padding()
-                        
                     }
-
                 } else {
                     ScrollView() {
                         LazyVGrid(columns: columns, spacing: 10) {
@@ -72,10 +70,9 @@ struct SearchView: View {
                 }
             }
             .navigationBarTitle("Search")
-//            .navigationBarItems.(leading: view)
         }
         .preferredColorScheme(.dark)
-        .searchable(text: $text, prompt: "Search")
+        .searchable(text: $text, prompt: "Search for a Movie or Tv show")
         .onAppear {
             if text.isEmpty {
                 viewModel.getTrendingMovies()
