@@ -32,9 +32,14 @@ struct UpcomingView: View {
                                     .font(.title)
                                     .frame(width: 150, height: 100)
                                 Spacer()
-                                Image(systemName: "play.circle")
-                                    .padding()
-                                    .font(.custom("", size: 42))
+                                NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: title.title!, youtubeView: VideoElement(id: IdVideoElement(kind: "", videoId: String(title.id))), tilteOverview: title.overview!))) {
+                                    
+                                    Image(systemName: "play.circle")
+                                        .padding()
+                                        .font(.custom("", size: 42))
+                                        .foregroundColor(.white)
+                                }
+                                
                             }
                             .frame(width: 360)
                         }

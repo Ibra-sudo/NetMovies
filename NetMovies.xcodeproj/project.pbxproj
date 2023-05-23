@@ -41,6 +41,7 @@
 		33DD54D32A0E335400972388 /* FirebaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD54D22A0E335400972388 /* FirebaseViewModel.swift */; };
 		33DD54D52A0E846F00972388 /* SearchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD54D42A0E846F00972388 /* SearchTest.swift */; };
 		33DD54D72A11230300972388 /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD54D62A11230300972388 /* YoutubeSearchResponse.swift */; };
+		33DD54D92A1CFB4200972388 /* TrailerWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD54D82A1CFB4200972388 /* TrailerWebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		33DD54D22A0E335400972388 /* FirebaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseViewModel.swift; sourceTree = "<group>"; };
 		33DD54D42A0E846F00972388 /* SearchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTest.swift; sourceTree = "<group>"; };
 		33DD54D62A11230300972388 /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
+		33DD54D82A1CFB4200972388 /* TrailerWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerWebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 				3302A0C82A03E7AA00B87764 /* MainTabBarView.swift */,
 				33DD54B62A09653300972388 /* TitleCollectionView.swift */,
 				33DD54D42A0E846F00972388 /* SearchTest.swift */,
+				33DD54D82A1CFB4200972388 /* TrailerWebView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				3302A0B729F8987400B87764 /* APICaller.swift in Sources */,
 				3302A0A829F8928400B87764 /* NetMoviesApp.swift in Sources */,
 				3302A0BD2A026D6F00B87764 /* LoginView.swift in Sources */,
+				33DD54D92A1CFB4200972388 /* TrailerWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

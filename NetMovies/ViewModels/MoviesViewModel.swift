@@ -7,3 +7,8 @@
 
 import Foundation
 
+struct MoviesViewModel {
+    let title: String
+    let youtubeView: VideoElement
+    let tilteOverview: String
+}

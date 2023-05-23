@@ -41,9 +41,14 @@ struct SearchView: View {
                                         .font(.title)
                                         .frame(width: 150, height: 100)
                                     Spacer()
-                                    Image(systemName: "play.circle")
-                                        .padding()
-                                        .font(.custom("", size: 42))
+                                    NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: title.title!, youtubeView: VideoElement(id: IdVideoElement(kind: "", videoId: String(title.id))), tilteOverview: title.overview!))) {
+                                        
+                                        Image(systemName: "play.circle")
+                                            .padding()
+                                            .font(.custom("", size: 42))
+                                            .foregroundColor(.white)
+                                    }
+                                    
                                 }
                                 .frame(width: 360)
                             }
@@ -54,15 +59,19 @@ struct SearchView: View {
                         LazyVGrid(columns: columns, spacing: 10) {
                             ForEach(viewModel.titles) { title in
                                 VStack {
-                                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(title.poster_path ?? "")")){ image in
-                                            image
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 140, height: 215)
-                                                .cornerRadius(10)
-                                    } placeholder: {
-                                        ProgressView()
+                                    NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: title.title!, youtubeView: VideoElement(id: IdVideoElement(kind: "", videoId: String(title.id))), tilteOverview: title.overview!))) {
+                                        
+                                        AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(title.poster_path ?? "")")){ image in
+                                                image
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 140, height: 215)
+                                                    .cornerRadius(10)
+                                        } placeholder: {
+                                            ProgressView()
+                                        }
                                     }
+                                    
                                 }
                             }
                         }
