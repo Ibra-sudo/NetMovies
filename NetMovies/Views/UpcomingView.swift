@@ -32,7 +32,7 @@ struct UpcomingView: View {
                                     .font(.title)
                                     .frame(width: 150, height: 100)
                                 Spacer()
-                                NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: title.title!, youtubeView: VideoElement(id: IdVideoElement(kind: "", videoId: String(title.id))), tilteOverview: title.overview!))) {
+                                NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: title.title!, tilteOverview: title.overview!))) {
                                     
                                     Image(systemName: "play.circle")
                                         .padding()

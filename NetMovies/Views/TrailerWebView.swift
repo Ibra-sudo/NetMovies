@@ -11,13 +11,12 @@ import WebKit
 struct TrailerWebView: View {
     
     @StateObject var viewModel = ApiCaller()
-//    @State private var selectedVideoUrl: URL?
     
     var model: MoviesViewModel
     
     var body: some View {
         VStack {
-            WebView(videoId: "\(model.youtubeView.id.videoId)")
+            WebView(videoId: "\(viewModel.youtubeTitle.id.videoId)")
                 .frame(height: 300)
             Text(model.title)
                 .font(.system(size: 22, weight: .bold))
@@ -41,6 +40,10 @@ struct TrailerWebView: View {
             
             Spacer()
         }
+        .onAppear{
+            viewModel.getYoutubeMovie(with: model.title)
+//            print("videoIdView \(viewModel.youtubeTitle.id.videoId)")
+        }
     }
 }
 
@@ -52,14 +55,23 @@ struct WebView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else {return}
-        uiView.scrollView.isScrollEnabled = false
-        uiView.load(URLRequest(url: youtubeURL))
+//        print("videoId \(videoId)")
+        
+        DispatchQueue.main.async {
+            guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else {return}
+            uiView.scrollView.isScrollEnabled = false
+            uiView.load(URLRequest(url: youtubeURL))
+        }
+//        DispatchQueue.main.async {
+//            self?.createOrUpdateWetterDatum(stadt, Wetter.fromWetterResponse(wetterResponse))
+//        }
     }
 }
 
+//https://youtube.com/watch?v=\(videoID)
+
 struct TrailerWebView_Previews: PreviewProvider {
     static var previews: some View {
-        TrailerWebView(model: MoviesViewModel(title: "SupermanKids", youtubeView: VideoElement(id: IdVideoElement(kind: "", videoId: "")), tilteOverview: "This is the best movie ever to watch as a kid!"))
+        TrailerWebView(model: MoviesViewModel(title: "SupermanKids", tilteOverview: "This is the best movie ever to watch as a kid!"))
     }
 }

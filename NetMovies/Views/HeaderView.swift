@@ -8,11 +8,36 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @State private var isShowingHeaderImage = false
+    @StateObject var viewModel = ApiCaller()
+//    let title = Title(from: <#Decoder#>)
     var body: some View {
 //        GeometryReader { geometry in
         NavigationStack{
             ZStack(alignment: .bottom) {
                 Image("spiderman-header-image")
+//                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(viewModel.images .poster_path ?? "")")) { image in
+//                    image
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fill)
+//                        .frame(width: 430, height: 450)
+//    //                    .position(x: 215, y: 290)
+//                        .clipped()
+//                        .overlay(
+//                            LinearGradient(
+//                                gradient: Gradient(colors: [.clear, .black]),
+//                                startPoint: .top,
+//                                endPoint: .bottom
+//                            )
+//    //                        .frame(height: geometry.size.height / 1.5)
+//    //                        .clipped()
+//                            .opacity(0.8)
+//    //                        .ignoresSafeArea(edges: .top)
+//                        )
+//
+//                } placeholder: {
+//                    ProgressView()
+//                }
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 430, height: 450)
@@ -30,21 +55,24 @@ struct HeaderView: View {
 //                        .ignoresSafeArea(edges: .top)
                     )
                 HStack(spacing: 80) {
-                    Button( action: {
-                        //Play action
-                    }) {
-                        Text("Play")
-                            .fontWeight(.semibold)
-                            .padding()
-                            .frame(width: 120, height: 40)
-                            .background(Color.clear)
-                            .foregroundColor(.white)
-                            .cornerRadius(5)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.white, lineWidth: 2)
-                            )
-                    }
+//                    Button( action: {
+                        NavigationLink(destination: SearchTest()){
+                            Text("Play")
+                                .fontWeight(.semibold)
+                                .padding()
+                                .frame(width: 120, height: 40)
+                                .background(Color.clear)
+                                .foregroundColor(.white)
+                                .cornerRadius(5)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                        }
+//                    }) {
+                        
+//                    }
+                    
 //                    Spacer()
                     Button( action: {
                         //Download action

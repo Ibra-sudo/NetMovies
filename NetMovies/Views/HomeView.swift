@@ -38,7 +38,7 @@ struct HomeView: View {
                                         
                                     case Sections.TrendingMovies.rawValue:
                                         ForEach(viewModel.trendingMovies) { movie in
-                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: movie.title!, youtubeView: VideoElement(id: IdVideoElement(kind: "", videoId: "" )), tilteOverview: movie.overview!)))
+                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: movie.title!, tilteOverview: movie.overview!)))
                                                 {
                                                 AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(movie.poster_path ?? "")")){ image in
                                                         image
@@ -55,7 +55,7 @@ struct HomeView: View {
                                         
                                     case Sections.TrendingTv.rawValue:
                                         ForEach(viewModel.trendingTv) { tv in
-                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: tv.title ?? "", youtubeView: VideoElement(id: IdVideoElement(kind: tv.media_type!, videoId: text)), tilteOverview: tv.overview!))) {
+                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: tv.title ?? "", tilteOverview: tv.overview!))) {
                                                 AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(tv.poster_path ?? "")")){ image in
                                                         image
                                                             .resizable()
@@ -70,7 +70,7 @@ struct HomeView: View {
 
                                     case Sections.Popular.rawValue:
                                         ForEach(viewModel.popularMovies) { popular in
-                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: popular.title!, youtubeView: VideoElement(id: IdVideoElement(kind: "", videoId: "")), tilteOverview: popular.overview!))) {
+                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: popular.title!, tilteOverview: popular.overview!))) {
                                                 AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(popular.poster_path ?? "")")){ image in
                                                         image
                                                             .resizable()
@@ -86,7 +86,7 @@ struct HomeView: View {
 
                                     case Sections.Upcoming.rawValue:
                                         ForEach(viewModel.upcomingMovies) { upcoming in
-                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: upcoming.title!, youtubeView: VideoElement(id: IdVideoElement(kind: "", videoId: "")), tilteOverview: upcoming.overview!))) {
+                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: upcoming.title!, tilteOverview: upcoming.overview!))) {
                                                 AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(upcoming.poster_path ?? "")")){ image in
                                                         image
                                                             .resizable()
@@ -102,7 +102,7 @@ struct HomeView: View {
                                         
                                     case Sections.TopRated.rawValue:
                                         ForEach(viewModel.topRatedMovies) { topRate in
-                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: topRate.title!, youtubeView: VideoElement(id: IdVideoElement(kind: "", videoId: "")), tilteOverview: topRate.overview!))) {
+                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: topRate.title!, tilteOverview: topRate.overview!))) {
                                                 AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(topRate.poster_path ?? "")")){ image in
                                                         image
                                                             .resizable()
@@ -158,7 +158,6 @@ struct HomeView: View {
             viewModel.getPopularMovies()
             viewModel.getUpcomingMovies()
             viewModel.getTopRatedMovies()
-            viewModel.getYoutubeMovie(with: "")
         }
     
     }
