@@ -23,11 +23,12 @@ struct HomeView: View {
     @State private var text = ""
     @State private var sectionTitles: [String] = ["Trending Movies", "Trending Tv", "Popular", "Upcoming Movies", "Top rated"]
     @StateObject var viewModel = ApiCaller()
+    @State private var isShowingHeaderImage = false
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                HeaderView()
+                HeaderView(toggleShowingHeaderImage: .constant(isShowingHeaderImage), model: MoviesViewModel(title: "", tilteOverview: ""))
                 VStack(alignment: .leading) {
                     ForEach(0..<sectionTitles.count, id: \.self) { index in
                         Section(header: Text(sectionTitles[index].capitalized)){
@@ -38,18 +39,23 @@ struct HomeView: View {
                                         
                                     case Sections.TrendingMovies.rawValue:
                                         ForEach(viewModel.trendingMovies) { movie in
-                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: movie.title!, tilteOverview: movie.overview!)))
-                                                {
+//                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: movie.title!, tilteOverview: movie.overview!)))
+//                                                {
                                                 AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(movie.poster_path ?? "")")){ image in
                                                         image
                                                             .resizable()
                                                             .scaledToFit()
                                                             .frame(width: 160, height: 240)
                                                             .cornerRadius(10)
+                                                            .onTapGesture {
+//                                                                HeaderView(isShowingHeaderImage: $toggleShowingHeaderImage, model: MoviesViewModel(title: "Hulk", tilteOverview: ""))
+                                                                isShowingHeaderImage = true
+                                                            }
                                                 } placeholder: {
                                                     ProgressView()
                                                 }
-                                            }
+                                                
+//                                            }
                                             
                                         }
                                         

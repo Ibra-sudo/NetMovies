@@ -8,52 +8,59 @@
 import SwiftUI
 
 struct HeaderView: View {
-    @State private var isShowingHeaderImage = false
+    @Binding var toggleShowingHeaderImage: Bool
     @StateObject var viewModel = ApiCaller()
-//    let title = Title(from: <#Decoder#>)
+    
+    let model: MoviesViewModel
     var body: some View {
 //        GeometryReader { geometry in
         NavigationStack{
             ZStack(alignment: .bottom) {
-                Image("spiderman-header-image")
-//                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(viewModel.images .poster_path ?? "")")) { image in
-//                    image
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fill)
-//                        .frame(width: 430, height: 450)
-//    //                    .position(x: 215, y: 290)
-//                        .clipped()
-//                        .overlay(
-//                            LinearGradient(
-//                                gradient: Gradient(colors: [.clear, .black]),
-//                                startPoint: .top,
-//                                endPoint: .bottom
-//                            )
-//    //                        .frame(height: geometry.size.height / 1.5)
-//    //                        .clipped()
-//                            .opacity(0.8)
-//    //                        .ignoresSafeArea(edges: .top)
-//                        )
-//
-//                } placeholder: {
-//                    ProgressView()
-//                }
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 430, height: 450)
-//                    .position(x: 215, y: 290)
-                    .clipped()
-                    .overlay(
-                        LinearGradient(
-                            gradient: Gradient(colors: [.clear, .black]),
-                            startPoint: .top,
-                            endPoint: .bottom
+                
+                if !toggleShowingHeaderImage {
+                    Image("spiderman-header-image")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 430, height: 450)
+    //                    .position(x: 215, y: 290)
+                        .clipped()
+                        .overlay(
+                            LinearGradient(
+                                gradient: Gradient(colors: [.clear, .black]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+    //                        .frame(height: geometry.size.height / 1.5)
+    //                        .clipped()
+                            .opacity(0.8)
+    //                        .ignoresSafeArea(edges: .top)
                         )
-//                        .frame(height: geometry.size.height / 1.5)
-//                        .clipped()
-                        .opacity(0.8)
-//                        .ignoresSafeArea(edges: .top)
-                    )
+                } else {
+                    ForEach(viewModel.images) { image in
+                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(image.poster_path ?? "")")) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 430, height: 450)
+            //                    .position(x: 215, y: 290)
+                                .clipped()
+                                .overlay(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [.clear, .black]),
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    )
+            //                        .frame(height: geometry.size.height / 1.5)
+            //                        .clipped()
+                                    .opacity(0.8)
+            //                        .ignoresSafeArea(edges: .top)
+                                )
+
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }
+                }
                 HStack(spacing: 80) {
 //                    Button( action: {
                         NavigationLink(destination: SearchTest()){
@@ -101,6 +108,10 @@ struct HeaderView: View {
                 
 
         }
+        .onAppear{
+            viewModel.fetchImages(with: model.title)
+            print("view\(viewModel.images.count)")
+        }
         
 //            .frame(height: 700)
             
@@ -111,7 +122,7 @@ struct HeaderView: View {
 
 struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderView()
+        HeaderView(toggleShowingHeaderImage: .constant(false), model: MoviesViewModel(title: "", tilteOverview: ""))
     }
 }
 
