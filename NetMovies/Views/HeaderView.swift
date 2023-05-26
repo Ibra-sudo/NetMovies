@@ -9,9 +9,10 @@ import SwiftUI
 
 struct HeaderView: View {
     @Binding var toggleShowingHeaderImage: Bool
+    @Binding var newImage: Image
     @StateObject var viewModel = ApiCaller()
     
-    let model: MoviesViewModel
+    let model: MoviesModel
     var body: some View {
 //        GeometryReader { geometry in
         NavigationStack{
@@ -36,34 +37,51 @@ struct HeaderView: View {
     //                        .ignoresSafeArea(edges: .top)
                         )
                 } else {
-                    ForEach(viewModel.images) { image in
-                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(image.poster_path ?? "")")) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 430, height: 450)
-            //                    .position(x: 215, y: 290)
-                                .clipped()
-                                .overlay(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [.clear, .black]),
-                                        startPoint: .top,
-                                        endPoint: .bottom
-                                    )
-            //                        .frame(height: geometry.size.height / 1.5)
-            //                        .clipped()
-                                    .opacity(0.8)
-            //                        .ignoresSafeArea(edges: .top)
-                                )
-
-                        } placeholder: {
-                            ProgressView()
-                        }
-                    }
+                    newImage
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 430, height: 500)
+                                    //                    .position(x: 215, y: 290)
+                        .clipped()
+                        .overlay(
+                            LinearGradient(
+                                gradient: Gradient(colors: [.clear, .black]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                                    //                        .frame(height: geometry.size.height / 1.5)
+                                    //                        .clipped()
+                            .opacity(0.8)
+                                    //                        .ignoresSafeArea(edges: .top)
+                        )
+//                    ForEach(viewModel.images) { image in
+//                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(image.poster_path ?? "")")) { image in
+//                            image
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fill)
+//                                .frame(width: 430, height: 450)
+//            //                    .position(x: 215, y: 290)
+//                                .clipped()
+//                                .overlay(
+//                                    LinearGradient(
+//                                        gradient: Gradient(colors: [.clear, .black]),
+//                                        startPoint: .top,
+//                                        endPoint: .bottom
+//                                    )
+//            //                        .frame(height: geometry.size.height / 1.5)
+//            //                        .clipped()
+//                                    .opacity(0.8)
+//            //                        .ignoresSafeArea(edges: .top)
+//                                )
+//
+//                        } placeholder: {
+//                            ProgressView()
+//                        }
+//                    }
                 }
                 HStack(spacing: 80) {
 //                    Button( action: {
-                        NavigationLink(destination: SearchTest()){
+                    NavigationLink(destination: TrailerWebView(model: MoviesModel(title: model.title, tilteOverview: model.tilteOverview))){
                             Text("Play")
                                 .fontWeight(.semibold)
                                 .padding()
@@ -109,7 +127,7 @@ struct HeaderView: View {
 
         }
         .onAppear{
-            viewModel.fetchImages(with: model.title)
+//            viewModel.fetchImages(with: model.title)
             print("view\(viewModel.images.count)")
         }
         
@@ -122,7 +140,7 @@ struct HeaderView: View {
 
 struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderView(toggleShowingHeaderImage: .constant(false), model: MoviesViewModel(title: "", tilteOverview: ""))
+        HeaderView(toggleShowingHeaderImage: .constant(false), newImage: .constant(Image("")), model: MoviesModel(title: "Spiderman", tilteOverview: "This is he most movie have ever to see!"))
     }
 }
 

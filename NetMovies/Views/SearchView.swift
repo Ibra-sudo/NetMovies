@@ -41,7 +41,7 @@ struct SearchView: View {
                                         .font(.title)
                                         .frame(width: 150, height: 100)
                                     Spacer()
-                                    NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: title.title!, tilteOverview: title.overview!))) {
+                                    NavigationLink(destination: TrailerWebView(model: MoviesModel(title: title.title!, tilteOverview: title.overview!))) {
                                         
                                         Image(systemName: "play.circle")
                                             .padding()
@@ -59,7 +59,7 @@ struct SearchView: View {
                         LazyVGrid(columns: columns, spacing: 10) {
                             ForEach(viewModel.titles) { title in
                                 VStack {
-                                    NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: title.title!, tilteOverview: title.overview!))) {
+                                    NavigationLink(destination: TrailerWebView(model: MoviesModel(title: title.title!, tilteOverview: title.overview!))) {
                                         
                                         AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(title.poster_path ?? "")")){ image in
                                                 image

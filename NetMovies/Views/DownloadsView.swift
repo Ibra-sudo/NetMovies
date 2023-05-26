@@ -7,52 +7,56 @@
 
 import SwiftUI
 
-var array = [1,2,3,4,5,6,7,8,9]
 struct DownloadsView: View {
-    @StateObject var model = ApiCaller()
+    
+//    @StateObject var Model = ApiCaller()
+    @StateObject var viewModel = MoviesViewModel()
+    
     var body: some View {
-        Text("lal")
-//        List {
-//            ForEach(model.movies) { movie in
-//                VStack {
-//                    //                    Text(movie.title ?? " ")
-//                    //                    Text(movie.original_title ?? " ")
-//                    //                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(movie.poster_path ?? " ")"
-//                    //                                        )){ image in
-//                    //                        image
-//                    //                            .resizable()
-//                    //                            .scaledToFit()
-//                    //                            .frame(width: 200, height: 200)
-//                    //                    } placeholder: {
-//                    //                        ProgressView()
-//                    //                    }
-//                    //                    .frame(width: 200, height: 200)
-//                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(movie.poster_path ?? " ")")) { imagePhase in
-//
-//                        switch imagePhase {
-//                        case .empty:
-//                            ProgressView()
-//                        case.success(let image):
-//                            image
-//                                .resizable()
-//                                .scaledToFit()
-//                                .frame(width: 200, height: 200)
-//                        case .failure:
-//                            Image(systemName: "questionmark")
-//                                .font(.headline)
-//                        default:
-//                            Image(systemName: "questionmark")
-//                                .font(.headline)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        .onAppear {
-//            model.getTrendingMovies()
-//        }
-        
-        
+        NavigationStack {
+            VStack {
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        ForEach(viewModel.savedMovies) { savedMovie in
+                            HStack {
+                                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(savedMovie.poster_path ?? "")")){ image in
+                                        image
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 140, height: 210)
+                                            .cornerRadius(10)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                Text(savedMovie.title ?? "")
+                                    .padding()
+                                    .font(.title)
+                                    .frame(width: 150, height: 100)
+                                Spacer()
+//                                NavigationLink(destination: TrailerWebView(model: MoviesModel(title: savedMovie.title!, tilteOverview: savedMovie.overview!))) {
+
+                                    Image(systemName: "play.circle")
+                                        .padding()
+                                        .font(.custom("", size: 42))
+                                        .foregroundColor(.white)
+//                                }
+
+                            }
+                            .frame(width: 360)
+                        }
+                        .onDelete { indexSet in
+                            viewModel.deleteMovie(indexSet: indexSet)
+                        }
+                    }
+                    .padding()
+                }
+            }
+            .navigationBarTitle("Downloads")
+        }
+        .preferredColorScheme(.dark)
+        .onAppear{
+            print("savedMovie\(viewModel.savedMovies)")
+        }
     }
 }
 

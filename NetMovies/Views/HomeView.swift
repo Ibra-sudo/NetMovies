@@ -20,15 +20,18 @@ struct HomeView: View {
 //    @State private var randomTrendingMovie: Title?
 //    @State var model = MoviesViewModel(title: "Superman", youtubeView: VideoElement(id: IdVideoElement(kind: "", videoId: "")), tilteOverview: "")
 //    let model: MoviesViewModel
-    @State private var text = ""
+//    @State private var text = ""
     @State private var sectionTitles: [String] = ["Trending Movies", "Trending Tv", "Popular", "Upcoming Movies", "Top rated"]
     @StateObject var viewModel = ApiCaller()
+    @StateObject var movieViewModel = MoviesViewModel()
     @State private var isShowingHeaderImage = false
+    @State private var newImage = Image("spiderman-header-image")
     
+//    let model: MoviesModel
     var body: some View {
         NavigationStack {
             ScrollView {
-                HeaderView(toggleShowingHeaderImage: .constant(isShowingHeaderImage), model: MoviesViewModel(title: "", tilteOverview: ""))
+                HeaderView(toggleShowingHeaderImage: .constant(isShowingHeaderImage), newImage: .constant(newImage), model: MoviesModel(title: "", tilteOverview: ""))
                 VStack(alignment: .leading) {
                     ForEach(0..<sectionTitles.count, id: \.self) { index in
                         Section(header: Text(sectionTitles[index].capitalized)){
@@ -47,9 +50,20 @@ struct HomeView: View {
                                                             .scaledToFit()
                                                             .frame(width: 160, height: 240)
                                                             .cornerRadius(10)
+                                                            .contextMenu {
+                                                                Button(action: {
+                                                                    movieViewModel.saveMovies(id: Int64(movie.id), title: movie.title!, media_type: movie.media_type!, original_title: movie.original_title!, poster_path: movie.poster_path!, overview: movie.overview!, vote_count: Int64(movie.vote_count), relase_date: movie.relase_date ?? "", vote_average: Double(movie.vote_average))
+                                                                    print("Its downloaded")
+                                                                }) {
+                                                                    Label("Download", systemImage: "tray.and.arrow.down")
+                                                                        
+                                                                }
+                                                            }
                                                             .onTapGesture {
-//                                                                HeaderView(isShowingHeaderImage: $toggleShowingHeaderImage, model: MoviesViewModel(title: "Hulk", tilteOverview: ""))
+                                                                
+//                                                                HeaderView(toggleShowingHeaderImage: $isShowingHeaderImage, newImage: $newImage, model: MoviesModel(title: movie.title!, tilteOverview: movie.overview!))
                                                                 isShowingHeaderImage = true
+                                                                newImage = image
                                                             }
                                                 } placeholder: {
                                                     ProgressView()
@@ -61,13 +75,21 @@ struct HomeView: View {
                                         
                                     case Sections.TrendingTv.rawValue:
                                         ForEach(viewModel.trendingTv) { tv in
-                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: tv.title ?? "", tilteOverview: tv.overview!))) {
+                                            NavigationLink(destination: TrailerWebView(model: MoviesModel(title: tv.title ?? "", tilteOverview: tv.overview!))) {
                                                 AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(tv.poster_path ?? "")")){ image in
                                                         image
                                                             .resizable()
                                                             .scaledToFit()
                                                             .frame(width: 160, height: 240)
                                                             .cornerRadius(10)
+                                                            .contextMenu {
+                                                                Button(action: {
+                                                                    print("Its downloaded")
+                                                                }) {
+                                                                    Label("Download", systemImage: "tray.and.arrow.down")
+                                                                        
+                                                                }
+                                                            }
                                                 } placeholder: {
                                                     ProgressView()
                                                 }
@@ -76,13 +98,21 @@ struct HomeView: View {
 
                                     case Sections.Popular.rawValue:
                                         ForEach(viewModel.popularMovies) { popular in
-                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: popular.title!, tilteOverview: popular.overview!))) {
+                                            NavigationLink(destination: TrailerWebView(model: MoviesModel(title: popular.title!, tilteOverview: popular.overview!))) {
                                                 AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(popular.poster_path ?? "")")){ image in
                                                         image
                                                             .resizable()
                                                             .scaledToFit()
                                                             .frame(width: 160, height: 240)
                                                             .cornerRadius(10)
+                                                            .contextMenu {
+                                                                Button(action: {
+                                                                    print("Its downloaded")
+                                                                }) {
+                                                                    Label("Download", systemImage: "tray.and.arrow.down")
+                                                                        
+                                                                }
+                                                            }
                                                 } placeholder: {
                                                     ProgressView()
                                                 }
@@ -92,13 +122,21 @@ struct HomeView: View {
 
                                     case Sections.Upcoming.rawValue:
                                         ForEach(viewModel.upcomingMovies) { upcoming in
-                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: upcoming.title!, tilteOverview: upcoming.overview!))) {
+                                            NavigationLink(destination: TrailerWebView(model: MoviesModel(title: upcoming.title!, tilteOverview: upcoming.overview!))) {
                                                 AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(upcoming.poster_path ?? "")")){ image in
                                                         image
                                                             .resizable()
                                                             .scaledToFit()
                                                             .frame(width: 160, height: 240)
                                                             .cornerRadius(10)
+                                                            .contextMenu {
+                                                                Button(action: {
+                                                                    print("Its downloaded")
+                                                                }) {
+                                                                    Label("Download", systemImage: "tray.and.arrow.down")
+                                                                        
+                                                                }
+                                                            }
                                                 } placeholder: {
                                                     ProgressView()
                                                 }
@@ -108,13 +146,21 @@ struct HomeView: View {
                                         
                                     case Sections.TopRated.rawValue:
                                         ForEach(viewModel.topRatedMovies) { topRate in
-                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: topRate.title!, tilteOverview: topRate.overview!))) {
+                                            NavigationLink(destination: TrailerWebView(model: MoviesModel(title: topRate.title!, tilteOverview: topRate.overview!))) {
                                                 AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(topRate.poster_path ?? "")")){ image in
                                                         image
                                                             .resizable()
                                                             .scaledToFit()
                                                             .frame(width: 160, height: 240)
                                                             .cornerRadius(10)
+                                                            .contextMenu {
+                                                                Button(action: {
+                                                                    print("Its downloaded")
+                                                                }) {
+                                                                    Label("Download", systemImage: "tray.and.arrow.down")
+                                                                        
+                                                                }
+                                                            }
                                                 } placeholder: {
                                                     ProgressView()
                                                 }
@@ -174,3 +220,4 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
+

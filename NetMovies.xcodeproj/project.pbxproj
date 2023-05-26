@@ -42,6 +42,9 @@
 		33DD54D52A0E846F00972388 /* SearchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD54D42A0E846F00972388 /* SearchTest.swift */; };
 		33DD54D72A11230300972388 /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD54D62A11230300972388 /* YoutubeSearchResponse.swift */; };
 		33DD54D92A1CFB4200972388 /* TrailerWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD54D82A1CFB4200972388 /* TrailerWebView.swift */; };
+		33DD54DC2A1FBCD100972388 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD54DB2A1FBCD100972388 /* WebKit.framework */; };
+		33DD54DF2A20B14100972388 /* NetMoviesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33DD54DD2A20B14100972388 /* NetMoviesDataModel.xcdatamodeld */; };
+		33DD54E12A20B2AE00972388 /* MoviesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD54E02A20B2AE00972388 /* MoviesModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +73,9 @@
 		33DD54D42A0E846F00972388 /* SearchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTest.swift; sourceTree = "<group>"; };
 		33DD54D62A11230300972388 /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
 		33DD54D82A1CFB4200972388 /* TrailerWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerWebView.swift; sourceTree = "<group>"; };
+		33DD54DB2A1FBCD100972388 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		33DD54DE2A20B14100972388 /* NetMoviesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NetMoviesDataModel.xcdatamodel; sourceTree = "<group>"; };
+		33DD54E02A20B2AE00972388 /* MoviesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33DD54DC2A1FBCD100972388 /* WebKit.framework in Frameworks */,
 				33DD54CC2A0D2F9A00972388 /* FirebaseStorageCombine-Community in Frameworks */,
 				33DD54C22A0D2F9A00972388 /* FirebaseDatabaseSwift in Frameworks */,
 				33DD54C62A0D2F9A00972388 /* FirebaseFirestoreCombine-Community in Frameworks */,
@@ -99,6 +106,7 @@
 			children = (
 				3302A0A629F8928400B87764 /* NetMovies */,
 				3302A0A529F8928400B87764 /* Products */,
+				33DD54DA2A1FBCD100972388 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -185,8 +193,18 @@
 			children = (
 				3302A0D12A051B9800B87764 /* Movie.swift */,
 				33DD54D62A11230300972388 /* YoutubeSearchResponse.swift */,
+				33DD54DD2A20B14100972388 /* NetMoviesDataModel.xcdatamodeld */,
+				33DD54E02A20B2AE00972388 /* MoviesModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		33DD54DA2A1FBCD100972388 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				33DD54DB2A1FBCD100972388 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,9 +311,11 @@
 				3302A0D02A0515C000B87764 /* MoviesViewModel.swift in Sources */,
 				3302A0D82A052A5100B87764 /* PlayView.swift in Sources */,
 				3302A0CE2A05031C00B87764 /* HeaderView.swift in Sources */,
+				33DD54DF2A20B14100972388 /* NetMoviesDataModel.xcdatamodeld in Sources */,
 				3302A0AA29F8928400B87764 /* ContentView.swift in Sources */,
 				3302A0B729F8987400B87764 /* APICaller.swift in Sources */,
 				3302A0A829F8928400B87764 /* NetMoviesApp.swift in Sources */,
+				33DD54E12A20B2AE00972388 /* MoviesModel.swift in Sources */,
 				3302A0BD2A026D6F00B87764 /* LoginView.swift in Sources */,
 				33DD54D92A1CFB4200972388 /* TrailerWebView.swift in Sources */,
 			);
@@ -583,6 +603,19 @@
 			productName = "FirebaseStorageCombine-Community";
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		33DD54DD2A20B14100972388 /* NetMoviesDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				33DD54DE2A20B14100972388 /* NetMoviesDataModel.xcdatamodel */,
+			);
+			currentVersion = 33DD54DE2A20B14100972388 /* NetMoviesDataModel.xcdatamodel */;
+			path = NetMoviesDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3302A09C29F8928400B87764 /* Project object */;
 }

@@ -12,7 +12,7 @@ struct TrailerWebView: View {
     
     @StateObject var viewModel = ApiCaller()
     
-    var model: MoviesViewModel
+    var model: MoviesModel
     
     var body: some View {
         VStack {
@@ -42,36 +42,62 @@ struct TrailerWebView: View {
         }
         .onAppear{
             viewModel.getYoutubeMovie(with: model.title)
-//            print("videoIdView \(viewModel.youtubeTitle.id.videoId)")
+//            performBackgroundWork(WKWebView())
+            print("videoIdView \(viewModel.youtubeTitle.id.videoId)")
         }
     }
 }
 
 struct WebView: UIViewRepresentable {
+     
     let videoId: String
     
     func makeUIView(context: Context) -> WKWebView {
-        return WKWebView()
+        let webView = WKWebView()
+//        webView.navigationDelegate = context.coordinator
+                
+        return webView
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
-//        print("videoId \(videoId)")
-        
-        DispatchQueue.main.async {
-            guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else {return}
-            uiView.scrollView.isScrollEnabled = false
-            uiView.load(URLRequest(url: youtubeURL))
+        DispatchQueue.global().async {
+//            guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else {return}
+//            uiView.scrollView.isScrollEnabled = false
+//            uiView.load(URLRequest(url: youtubeURL))
+//            Thread.sleep(forTimeInterval: 1)
+            
+            
+            DispatchQueue.main.async {
+                guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else {return}
+                uiView.scrollView.isScrollEnabled = false
+                uiView.load(URLRequest(url: youtubeURL))
+            }
         }
-//        DispatchQueue.main.async {
-//            self?.createOrUpdateWetterDatum(stadt, Wetter.fromWetterResponse(wetterResponse))
-//        }
     }
+
 }
+//var videoId: String = ""
+//func performBackgroundWork(_ uiView: WKWebView) {
+//
+//    DispatchQueue.global().async {
+////        let videoId: String
+//        Thread.sleep(forTimeInterval: 1)
+//
+//        DispatchQueue.main.async {
+//
+//            guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else {return}
+//            uiView.scrollView.isScrollEnabled = false
+//            uiView.load(URLRequest(url: youtubeURL))
+//        }
+//    }
+//}
+    
+
 
 //https://youtube.com/watch?v=\(videoID)
 
 struct TrailerWebView_Previews: PreviewProvider {
     static var previews: some View {
-        TrailerWebView(model: MoviesViewModel(title: "SupermanKids", tilteOverview: "This is the best movie ever to watch as a kid!"))
+        TrailerWebView(model: MoviesModel(title: "SupermanKids", tilteOverview: "This is the best movie ever to watch as a kid!"))
     }
 }
