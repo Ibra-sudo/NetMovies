@@ -15,48 +15,58 @@ struct DownloadsView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                ScrollView {
+//                ScrolView {
                     VStack(alignment: .leading) {
-                        ForEach(viewModel.savedMovies) { savedMovie in
-                            HStack {
-                                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(savedMovie.poster_path ?? "")")){ image in
+                        List{
+                            ForEach(viewModel.savedMovies) { savedMovie in
+                                HStack {
+                                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(savedMovie.poster_path ?? "")")){ image in
                                         image
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: 140, height: 210)
                                             .cornerRadius(10)
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                                Text(savedMovie.title ?? "")
-                                    .padding()
-                                    .font(.title)
-                                    .frame(width: 150, height: 100)
-                                Spacer()
-//                                NavigationLink(destination: TrailerWebView(model: MoviesModel(title: savedMovie.title!, tilteOverview: savedMovie.overview!))) {
-
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                    Text(savedMovie.title ?? "")
+                                        .padding()
+                                        .font(.title)
+                                        .frame(width: 150, height: 100)
+                                    Spacer()
+                                    NavigationLink(destination: TrailerWebView(model: MoviesModel(title: savedMovie.title!, tilteOverview: savedMovie.overview!))) {
+                                    
                                     Image(systemName: "play.circle")
                                         .padding()
                                         .font(.custom("", size: 42))
                                         .foregroundColor(.white)
-//                                }
-
+                                    }
+                                    
+                                }
+                                .frame(width: 400)
                             }
-                            .frame(width: 360)
+                            .onDelete { indexSet in
+                                
+                                viewModel.deleteMovie(indexSet: indexSet)
+                            }
                         }
-                        .onDelete { indexSet in
-                            viewModel.deleteMovie(indexSet: indexSet)
-                        }
+                        .padding()
+                        .frame(width: 500)
                     }
-                    .padding()
-                }
+//                }
             }
             .navigationBarTitle("Downloads")
+            
         }
         .preferredColorScheme(.dark)
         .onAppear{
-            print("savedMovie\(viewModel.savedMovies)")
+            viewModel.fetchMovies()
+//            print("savedMovie\(viewModel.savedMovies)")
         }
+//        .onChange(of: viewModel.savedMovies) { _ in
+//            viewModel.fetchMovies()
+//        }
+        .badge(viewModel.savedMovies.count)
     }
 }
 

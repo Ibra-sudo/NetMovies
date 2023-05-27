@@ -13,28 +13,28 @@ struct MainTabBarViewController: View {
     
     var body: some View {
 //        NavigationStack {
-            TabView {
-                HomeView()
-                    .tabItem({
-                        Text("Home")
-                        Image(systemName: "house")
-                    }).tag(0)
-                UpcomingView()
-                    .tabItem({
-                        Text("Coming Soon")
-                        Image(systemName: "play.circle")
-                    }).tag(1)
-                SearchView()
-                    .tabItem({
-                        Text("Top Search")
-                        Image(systemName: "magnifyingglass")
-                    }).tag(2)
-                DownloadsView()
-                    .tabItem({
-                        Text("Downloads")
-                        Image(systemName: "tray.and.arrow.down")
-                    }).tag(3)
-            }.preferredColorScheme(.dark)
+        TabView() {
+            HomeView()
+                .tabItem({
+                    Text("Home")
+                    Image(systemName: "house")
+                }).tag(0)
+            UpcomingView()
+                .tabItem({
+                    Text("Coming Soon")
+                    Image(systemName: "play.circle")
+                }).tag(1)
+            SearchView()
+                .tabItem({
+                    Text("Top Search")
+                    Image(systemName: "magnifyingglass")
+                }).tag(2)
+            DownloadsView()
+                .tabItem({
+                    Text("Downloads")
+                    Image(systemName: "tray.and.arrow.down")
+                }).tag(3)
+        }.preferredColorScheme(.dark)
             
 //        }
     }

@@ -18,16 +18,13 @@ enum Sections: Int {
 struct HomeView: View {
 
 //    @State private var randomTrendingMovie: Title?
-//    @State var model = MoviesViewModel(title: "Superman", youtubeView: VideoElement(id: IdVideoElement(kind: "", videoId: "")), tilteOverview: "")
-//    let model: MoviesViewModel
-//    @State private var text = ""
     @State private var sectionTitles: [String] = ["Trending Movies", "Trending Tv", "Popular", "Upcoming Movies", "Top rated"]
     @StateObject var viewModel = ApiCaller()
     @StateObject var movieViewModel = MoviesViewModel()
     @State private var isShowingHeaderImage = false
     @State private var newImage = Image("spiderman-header-image")
+    @State private var itemExist = false
     
-//    let model: MoviesModel
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -52,12 +49,21 @@ struct HomeView: View {
                                                             .cornerRadius(10)
                                                             .contextMenu {
                                                                 Button(action: {
-                                                                    movieViewModel.saveMovies(id: Int64(movie.id), title: movie.title!, media_type: movie.media_type!, original_title: movie.original_title!, poster_path: movie.poster_path!, overview: movie.overview!, vote_count: Int64(movie.vote_count), relase_date: movie.relase_date ?? "", vote_average: Double(movie.vote_average))
-                                                                    print("Its downloaded")
+                                                                    if movieViewModel.savedMovies.contains(where: { $0.title == movie.title! }) {
+                                                                        print("its exist")
+                                                                        itemExist = true
+                                                                    } else {
+                                                                        movieViewModel.saveMovies(id: Int64(movie.id), title: movie.title!, media_type: movie.media_type!, original_title: movie.original_title!, poster_path: movie.poster_path!, overview: movie.overview!, vote_count: Int64(movie.vote_count), relase_date: movie.relase_date ?? "", vote_average: Double(movie.vote_average))
+                                                                        print("Its downloaded")
+                                                                    }
+                                                                    
                                                                 }) {
                                                                     Label("Download", systemImage: "tray.and.arrow.down")
                                                                         
                                                                 }
+                                                            }
+                                                            .alert(isPresented: $itemExist) {
+                                                                Alert(title: Text("This movie already downloaded"), message: Text("The movie \(movie.title!) already exist in the downloads!"), dismissButton: .default(Text("OK")))
                                                             }
                                                             .onTapGesture {
                                                                 
@@ -84,11 +90,20 @@ struct HomeView: View {
                                                             .cornerRadius(10)
                                                             .contextMenu {
                                                                 Button(action: {
-                                                                    print("Its downloaded")
+                                                                    if movieViewModel.savedMovies.contains(where: { $0.title == tv.title ?? "" }) {
+                                                                        print("its exist")
+                                                                        itemExist = true
+                                                                    } else {
+                                                                        movieViewModel.saveMovies(id: Int64(tv.id), title: tv.title ?? "", media_type: tv.media_type!, original_title: tv.original_title ?? "", poster_path: tv.poster_path!, overview: tv.overview!, vote_count: Int64(tv.vote_count), relase_date: tv.relase_date ?? "", vote_average: Double(tv.vote_average))
+                                                                        print("Its downloaded")
+                                                                    }
                                                                 }) {
                                                                     Label("Download", systemImage: "tray.and.arrow.down")
                                                                         
                                                                 }
+                                                            }
+                                                            .alert(isPresented: $itemExist) {
+                                                                Alert(title: Text("This movie already downloaded"), message: Text("The movie \(tv.title ?? "") already exist in the downloads!"), dismissButton: .default(Text("OK")))
                                                             }
                                                 } placeholder: {
                                                     ProgressView()
@@ -107,11 +122,20 @@ struct HomeView: View {
                                                             .cornerRadius(10)
                                                             .contextMenu {
                                                                 Button(action: {
-                                                                    print("Its downloaded")
+                                                                    if movieViewModel.savedMovies.contains(where: { $0.title == popular.title! }) {
+                                                                        print("its exist")
+                                                                        itemExist = true
+                                                                    } else {
+                                                                        movieViewModel.saveMovies(id: Int64(popular.id), title: popular.title!, media_type: popular.media_type ?? "", original_title: popular.original_title!, poster_path: popular.poster_path!, overview: popular.overview!, vote_count: Int64(popular.vote_count), relase_date: popular.relase_date ?? "", vote_average: Double(popular.vote_average))
+                                                                        print("Its downloaded")
+                                                                    }
                                                                 }) {
                                                                     Label("Download", systemImage: "tray.and.arrow.down")
                                                                         
                                                                 }
+                                                            }
+                                                            .alert(isPresented: $itemExist) {
+                                                                Alert(title: Text("This movie already downloaded"), message: Text("The movie \(popular.title!) already exist in the downloads!"), dismissButton: .default(Text("OK")))
                                                             }
                                                 } placeholder: {
                                                     ProgressView()
@@ -131,11 +155,20 @@ struct HomeView: View {
                                                             .cornerRadius(10)
                                                             .contextMenu {
                                                                 Button(action: {
-                                                                    print("Its downloaded")
+                                                                    if movieViewModel.savedMovies.contains(where: { $0.title == upcoming.title! }) {
+                                                                        print("its exist")
+                                                                        itemExist = true
+                                                                    } else {
+                                                                        movieViewModel.saveMovies(id: Int64(upcoming.id), title: upcoming.title!, media_type: upcoming.media_type ?? "", original_title: upcoming.original_title!, poster_path: upcoming.poster_path!, overview: upcoming.overview!, vote_count: Int64(upcoming.vote_count), relase_date: upcoming.relase_date ?? "", vote_average: Double(upcoming.vote_average))
+                                                                        print("Its downloaded")
+                                                                    }
                                                                 }) {
                                                                     Label("Download", systemImage: "tray.and.arrow.down")
                                                                         
                                                                 }
+                                                            }
+                                                            .alert(isPresented: $itemExist) {
+                                                                Alert(title: Text("This movie already downloaded"), message: Text("The movie \(upcoming.title!) already exist in the downloads!"), dismissButton: .default(Text("OK")))
                                                             }
                                                 } placeholder: {
                                                     ProgressView()
@@ -155,11 +188,20 @@ struct HomeView: View {
                                                             .cornerRadius(10)
                                                             .contextMenu {
                                                                 Button(action: {
-                                                                    print("Its downloaded")
+                                                                    if movieViewModel.savedMovies.contains(where: { $0.title == topRate.title! }) {
+                                                                        print("its exist")
+                                                                        itemExist = true
+                                                                    } else {
+                                                                        movieViewModel.saveMovies(id: Int64(topRate.id), title: topRate.title!, media_type: topRate.media_type ?? "", original_title: topRate.original_title!, poster_path: topRate.poster_path!, overview: topRate.overview!, vote_count: Int64(topRate.vote_count), relase_date: topRate.relase_date ?? "", vote_average: Double(topRate.vote_average))
+                                                                        print("Its downloaded")
+                                                                    }
                                                                 }) {
                                                                     Label("Download", systemImage: "tray.and.arrow.down")
                                                                         
                                                                 }
+                                                            }
+                                                            .alert(isPresented: $itemExist) {
+                                                                Alert(title: Text("This movie already downloaded"), message: Text("The movie \(topRate.original_title!) already exist in the downloads!"), dismissButton: .default(Text("OK")))
                                                             }
                                                 } placeholder: {
                                                     ProgressView()
@@ -214,6 +256,8 @@ struct HomeView: View {
     
     }
 }
+
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
