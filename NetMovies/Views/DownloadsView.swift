@@ -63,9 +63,9 @@ struct DownloadsView: View {
             viewModel.fetchMovies()
 //            print("savedMovie\(viewModel.savedMovies)")
         }
-//        .onChange(of: viewModel.savedMovies) { _ in
-//            viewModel.fetchMovies()
-//        }
+        .onChange(of: viewModel.savedMovies) { _ in
+            viewModel.fetchMovies()
+        }
         .badge(viewModel.savedMovies.count)
     }
 }

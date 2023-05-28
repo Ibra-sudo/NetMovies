@@ -34,7 +34,8 @@ struct MainTabBarViewController: View {
                     Text("Downloads")
                     Image(systemName: "tray.and.arrow.down")
                 }).tag(3)
-        }.preferredColorScheme(.dark)
+        }
+        .preferredColorScheme(.dark)
             
 //        }
     }

@@ -1,5 +1,6 @@
 
 import SwiftUI
+import SDWebImage
 
 struct SplashScreen: View {
     var body: some View {
@@ -17,10 +18,18 @@ struct SplashScreen: View {
                         .bold()
                         .foregroundColor(.white)
                         .font(.custom("AmericanTypewriter", size: 40))
+//                    AnimatedImage(url: getLogoURL())
+//                    SDAnimatedImage(url: getLogoURL())
                 }
             }
         }.preferredColorScheme(.dark)
     }
+    
+//    func getLogoURL() -> URL {
+//        let bundle = Bundle.main.path(forResource: "NetMovies", ofType: "gif")
+//        let url = URL(fileURLWithPath: bundle ?? "")
+//        return url
+//    }
 }
 
 struct SplashScreen_Previews: PreviewProvider {
