@@ -18,30 +18,30 @@ struct LoginView: View {
                     
                     Image("Logo")
                         .resizable()
-                        .frame(width: 200, height: 200)
+                        .frame(width: 190, height: 190)
                         .cornerRadius(100)
                         .padding()
                     
                     Text("Net Movies")
-                        .font(.system(size: 50, weight: .heavy, design: .serif))
+                        .font(.system(size: 42, weight: .heavy, design: .serif))
                         .foregroundColor(.white)
                     
                     TextField("Email or phone number", text: $email)
                         .padding()
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
-                        .frame(width: 390, height: 80)
+                        .frame(width: 380, height: 65)
                         .background(Color.white.opacity(0.4))
                         .cornerRadius(10)
-                        .font(.system(size: 25, weight: .light, design: .serif))
+                        .font(.system(size: 20, weight: .light, design: .serif))
                         .keyboardType(.emailAddress)
                     
                     SecureField("Password", text: $password)
                         .padding()
-                        .frame(width: 390, height: 80)
+                        .frame(width: 380, height: 65)
                         .background(Color.white.opacity(0.4))
                         .cornerRadius(10)
-                        .font(.system(size: 25, weight: .light, design: .serif))
+                        .font(.system(size: 20, weight: .light, design: .serif))
                         .padding()
                     
 //                    NavigationLink(destination: MainTabBarViewController()) {
@@ -65,7 +65,7 @@ struct LoginView: View {
                         Text("Sign In")
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
-                            .frame(width: 360, height: 30)
+                            .frame(width: 350, height: 30)
                             .padding()
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
@@ -73,7 +73,7 @@ struct LoginView: View {
                             )
                             
                     }
-                    .padding(.top, 30)
+                    .padding(.top, 20)
                     
 //                    NavigationLink(
 //                        destination: MainTabBarViewController(), isActive: $isSignedIn, label: { EmptyView() }
@@ -84,11 +84,13 @@ struct LoginView: View {
                             .font(.system(size: 20, weight: .heavy, design: .serif))
                             .foregroundColor(.white.opacity(0.6))
                             .underline()
-                            .padding(.all, 30)
+                            .padding(.all, 20)
                     }
                     
-                    Text("Sign in is protected by Google reCAPTCHA to ensure \n                              you're not a bot.")
+                    Text("Sign in is protected by Google reCAPTCHA\n              to ensure you're not a bot.")
+                        .padding(.init(.init(top: 0, leading: 10, bottom: 0, trailing: 10)))
                         .foregroundColor(.white.opacity(0.6))
+                        .frame(width: 440)
                 }
             }
         }.preferredColorScheme(.dark)

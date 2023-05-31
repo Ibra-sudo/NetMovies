@@ -20,51 +20,58 @@ struct DownloadsView: View {
                         List{
                             ForEach(viewModel.savedMovies) { savedMovie in
                                 HStack {
-                                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(savedMovie.poster_path ?? "")")){ image in
-                                        image
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 140, height: 210)
-                                            .cornerRadius(10)
-                                    } placeholder: {
-                                        ProgressView()
-                                    }
-                                    Text(savedMovie.title ?? "")
-                                        .padding()
-                                        .font(.title)
-                                        .frame(width: 150, height: 100)
-                                    Spacer()
                                     NavigationLink(destination: TrailerWebView(model: MoviesModel(title: savedMovie.title!, tilteOverview: savedMovie.overview!))) {
-                                    
-                                    Image(systemName: "play.circle")
-                                        .padding()
-                                        .font(.custom("", size: 42))
-                                        .foregroundColor(.white)
+                                        AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(savedMovie.poster_path ?? "")")){ image in
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 140, height: 210)
+                                                .cornerRadius(10)
+                                        } placeholder: {
+                                            ProgressView()
+                                        }
+                                        Text(savedMovie.title ?? "")
+                                            .padding()
+                                            .font(.title)
+                                            .frame(width: 120, height: 100)
+                                        Spacer()
+                                        Image(systemName: "play.circle")
+                                            .padding()
+                                            .font(.custom("", size: 40))
+                                            .foregroundColor(.white)
                                     }
-                                    
                                 }
-                                .frame(width: 400)
                             }
                             .onDelete { indexSet in
-                                
                                 viewModel.deleteMovie(indexSet: indexSet)
                             }
                         }
-                        .padding()
+                        .padding(.init(.init(top: 0, leading: 34, bottom: 0, trailing: 34)))
                         .frame(width: 500)
                     }
+//                    .navigationBarTitle("Downloads")
 //                }
             }
             .navigationBarTitle("Downloads")
-            
         }
         .preferredColorScheme(.dark)
-        .onAppear{
+        .onAppear {
             viewModel.fetchMovies()
-//            print("savedMovie\(viewModel.savedMovies)")
+//            Model.getTrendingMovies()
+//            Model.getTrendingTvs()
+//            Model.getPopularMovies()
+//            Model.getUpcomingMovies()
+//            Model.getTopRatedMovies()
+//            print("savedMovie\(viewModel.savedMovies.count)")
         }
         .onChange(of: viewModel.savedMovies) { _ in
             viewModel.fetchMovies()
+//            print("savedMovie\(viewModel.savedMovies.count)")
+//            Model.getTrendingMovies()
+//            Model.getTrendingTvs()
+//            Model.getPopularMovies()
+//            Model.getUpcomingMovies()
+//            Model.getTopRatedMovies()
         }
         .badge(viewModel.savedMovies.count)
     }

@@ -36,15 +36,14 @@ struct HomeView: View {
                 VStack(alignment: .leading) {
                     ForEach(0..<sectionTitles.count, id: \.self) { index in
                         Section(header: Text(sectionTitles[index].capitalized)){
-                            ScrollView(.horizontal, showsIndicators: false) {
+                            ScrollView(.horizontal , showsIndicators: false) {
                                 HStack(spacing: 10) {
                                     
                                     switch index {
                                         
                                     case Sections.TrendingMovies.rawValue:
                                         ForEach(viewModel.trendingMovies) { movie in
-//                                            NavigationLink(destination: TrailerWebView(model: MoviesViewModel(title: movie.title!, tilteOverview: movie.overview!)))
-//                                                {
+                                            NavigationLink(destination: TrailerWebView(model: MoviesModel(title: movie.title ?? "", tilteOverview: movie.overview!))){
                                                 AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(movie.poster_path ?? "")")){ image in
                                                         image
                                                             .resizable()
@@ -56,9 +55,9 @@ struct HomeView: View {
                                                                     
                                                                     if movieViewModel.savedMovies.contains(where: { $0.title == movie.title! }) {
                                                                         print("its exist")
-                                                                        progressBar.removeProgressWithAnimations()
-
                                                                         itemExist = true
+                                                                    } else if progressBar.isAdded {
+                                                                        progressBar.removeProgressWithAnimations()
                                                                     } else {
                                                                         let config = ProgressConfig(title: movie.title!, progressImage: "arrow.up", expandedImage: "clock.badge.checkmark.fill", tint: .yellow, rotationEnabeld: false)
                                                                         progressBar.addProgressView(config: config)
@@ -69,7 +68,7 @@ struct HomeView: View {
                                                                     }
                                                                     
                                                                 }) {
-                                                                    Label("Download", systemImage: "tray.and.arrow.down")
+                                                                     Label("Download", systemImage: "tray.and.arrow.down")
                                                                         
                                                                 }
                                                                 .onReceive(Timer.publish(every: 0.01, on: .main, in: .default).autoconnect()) { _ in
@@ -86,17 +85,18 @@ struct HomeView: View {
                                                             .alert(isPresented: $itemExist) {
                                                                 Alert(title: Text("This movie already downloaded"), message: Text("The movie \(movie.title!) already exist in the downloads!"), dismissButton: .default(Text("OK")))
                                                             }
-                                                            .onTapGesture {
-                                                                
-//                                                                HeaderView(toggleShowingHeaderImage: $isShowingHeaderImage, newImage: $newImage, model: MoviesModel(title: movie.title!, tilteOverview: movie.overview!))
-                                                                isShowingHeaderImage = true
-                                                                newImage = image
-                                                            }
+//                                                            .onTapGesture {
+//
+////                                                                HeaderView(toggleShowingHeaderImage: $isShowingHeaderImage, newImage: $newImage, model: MoviesModel(title: movie.title!, tilteOverview: movie.overview!))
+//                                                                isShowingHeaderImage = true
+//                                                                newImage = image
+//                                                            }
+                                                            
                                                 } placeholder: {
                                                     ProgressView()
                                                 }
                                                 
-//                                            }
+                                            }
                                             
                                         }
                                         
@@ -113,8 +113,9 @@ struct HomeView: View {
                                                                 Button(action: {
                                                                     if movieViewModel.savedMovies.contains(where: { $0.title == tv.title ?? "" }) {
                                                                         print("its exist")
-                                                                        progressBar.removeProgressWithAnimations()
                                                                         itemExist = true
+                                                                    } else if progressBar.isAdded {
+                                                                        progressBar.removeProgressWithAnimations()
                                                                     } else {
                                                                         let config = ProgressConfig(title: tv.title ?? "", progressImage: "arrow.up", expandedImage: "clock.badge.checkmark.fill", tint: .yellow, rotationEnabeld: false)
                                                                         progressBar.addProgressView(config: config)
@@ -158,8 +159,9 @@ struct HomeView: View {
                                                                 Button(action: {
                                                                     if movieViewModel.savedMovies.contains(where: { $0.title == popular.title! }) {
                                                                         print("its exist")
-                                                                        progressBar.removeProgressWithAnimations()
                                                                         itemExist = true
+                                                                    } else if progressBar.isAdded {
+                                                                        progressBar.removeProgressWithAnimations()
                                                                     } else {
                                                                         let config = ProgressConfig(title: popular.title!, progressImage: "arrow.up", expandedImage: "clock.badge.checkmark.fill", tint: .yellow, rotationEnabeld: false)
                                                                         progressBar.addProgressView(config: config)
@@ -204,8 +206,9 @@ struct HomeView: View {
                                                                 Button(action: {
                                                                     if movieViewModel.savedMovies.contains(where: { $0.title == upcoming.title! }) {
                                                                         print("its exist")
-                                                                        progressBar.removeProgressWithAnimations()
                                                                         itemExist = true
+                                                                    } else if progressBar.isAdded {
+                                                                        progressBar.removeProgressWithAnimations()
                                                                     } else {
                                                                         let config = ProgressConfig(title: upcoming.title!, progressImage: "arrow.up", expandedImage: "clock.badge.checkmark.fill", tint: .yellow, rotationEnabeld: false)
                                                                         progressBar.addProgressView(config: config)
@@ -250,8 +253,9 @@ struct HomeView: View {
                                                                 Button(action: {
                                                                     if movieViewModel.savedMovies.contains(where: { $0.title == topRate.title! }) {
                                                                         print("its exist")
-                                                                        progressBar.removeProgressWithAnimations()
                                                                         itemExist = true
+                                                                    } else if progressBar.isAdded {
+                                                                        progressBar.removeProgressWithAnimations()
                                                                     } else {
                                                                         let config = ProgressConfig(title: topRate.title!, progressImage: "arrow.up", expandedImage: "clock.badge.checkmark.fill", tint: .yellow, rotationEnabeld: false)
                                                                         progressBar.addProgressView(config: config)
@@ -289,7 +293,7 @@ struct HomeView: View {
                                 }
                             }
                         }
-                        .padding(.init(.init(top: 15, leading: 0, bottom: 0, trailing: 0)))
+                        .padding(.init(.init(top: 15, leading: 20, bottom: 0, trailing: 20)))
                         .font(.title2)
                     }
                 }
@@ -323,7 +327,10 @@ struct HomeView: View {
             viewModel.getPopularMovies()
             viewModel.getUpcomingMovies()
             viewModel.getTopRatedMovies()
+            movieViewModel.fetchMovies()
+            print("savedMovie\(movieViewModel.savedMovies.count)")
         }
+        
     
     }
 }

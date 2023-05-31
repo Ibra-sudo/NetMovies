@@ -58,14 +58,14 @@ struct SearchView: View {
                     ScrollView() {
                         LazyVGrid(columns: columns, spacing: 10) {
                             ForEach(viewModel.titles) { title in
-                                VStack {
+                                VStack(spacing: 10) {
                                     NavigationLink(destination: TrailerWebView(model: MoviesModel(title: title.title!, tilteOverview: title.overview!))) {
                                         
                                         AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(title.poster_path ?? "")")){ image in
                                                 image
                                                     .resizable()
                                                     .scaledToFit()
-                                                    .frame(width: 140, height: 215)
+                                                    .frame(width: 130, height: 210)
                                                     .cornerRadius(10)
                                         } placeholder: {
                                             ProgressView()

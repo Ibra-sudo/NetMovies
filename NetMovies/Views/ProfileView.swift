@@ -19,7 +19,7 @@ struct ProfileView: View {
             Text("Sign Out")
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
-                .frame(width: 360, height: 30)
+                .frame(width: 340, height: 30)
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
