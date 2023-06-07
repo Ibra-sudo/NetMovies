@@ -28,16 +28,14 @@ struct HomeView: View {
     @State private var itemExist = false
     
     var body: some View {
-
         NavigationStack {
-            
             ScrollView {
                 HeaderView(toggleShowingHeaderImage: .constant(isShowingHeaderImage), newImage: .constant(newImage), model: MoviesModel(title: "", tilteOverview: ""))
                 VStack(alignment: .leading) {
                     ForEach(0..<sectionTitles.count, id: \.self) { index in
                         Section(header: Text(sectionTitles[index].capitalized)){
                             ScrollView(.horizontal , showsIndicators: false) {
-                                HStack(spacing: 10) {
+                                HStack(spacing: 11) {
                                     
                                     switch index {
                                         
@@ -328,7 +326,6 @@ struct HomeView: View {
             viewModel.getUpcomingMovies()
             viewModel.getTopRatedMovies()
             movieViewModel.fetchMovies()
-            print("savedMovie\(movieViewModel.savedMovies.count)")
         }
         
     

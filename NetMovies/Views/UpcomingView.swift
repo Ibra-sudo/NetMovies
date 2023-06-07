@@ -42,6 +42,7 @@ struct UpcomingView: View {
                                 
                             }
                             .frame(width: 360)
+                            .padding(.top, 5)
                         }
                     }.padding()
                 }

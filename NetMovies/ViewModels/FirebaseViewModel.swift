@@ -48,18 +48,21 @@ class FirebaseViewModel: ObservableObject {
     }
     
     func signIn(email: String, password: String) {
-        print("\(signedIn)")
+        
+        guard !email.isEmpty && !password.isEmpty else {
+            return print("Email or password should not be empty!")
+        }
+        
         auth.signIn(withEmail: email, password: password) { [weak self] (authResult, error) in
-//            guard authResult != nil, error != nil else {
-//                return
-//            }
-            if let error = error {
-                print("Error singing in: \(error.localizedDescription)")
-            } else {
-                print("Signing in successfuly!")
-            }
             
+            guard error == nil else {
+//                print("error: \(error)")
+                print("Email or password is not correct!")
+                return
+            }
+
             DispatchQueue.main.async {
+                print("Signing in successfuly!")
                 self?.signedIn = true
             }
         }

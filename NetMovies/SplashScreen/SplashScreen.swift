@@ -21,6 +21,7 @@ struct SplashScreen: View {
 //                    AnimatedImage(url: getLogoURL())
 //                    SDAnimatedImage(url: getLogoURL())
                 }
+                .padding(.init(.init(top: 0, leading: 0, bottom: 70, trailing: 0)))
             }
         }.preferredColorScheme(.dark)
     }

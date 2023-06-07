@@ -8,46 +8,30 @@
 import SwiftUI
 
 struct PlayView: View {
-    let items = ["Item 1", "Item 2", "Item 3", "Item 4"]
+    
+    @GestureState var press = false
+    @State var show = false
+    
     var body: some View {
-        ScrollView {
-                   VStack(spacing: 0) {
-                       ForEach(items, id: \.self) { item in
-//                           Sections(header: Text(items[item])){
-//
-//                           }
-                           VStack {
-//                               Text(item)
-//                                   .font(.headline)
-//                                   .padding()
-                               
-                               ScrollView(.horizontal, showsIndicators: false) {
-                                   HStack(spacing:10) {
-                                       ForEach(0..<10) { index in
-                                           Text("\(item) \(index)")
-                                               .padding()
-                                               .frame(width: 100 ,height: 190)
-                                               .background(Color.gray)
-                                               .cornerRadius(5)
-                                       }
-                                   }
-                                   .padding(.horizontal)
-                               }
-                               .frame(height: 200)
-                           }
-                           .background(Color.white)
-                           .cornerRadius(10)
-                           .shadow(radius: 1)
-                           .padding()
-                       }
-                   }
-               }
-           }
+        Text("Coming Soon!")
+            .foregroundColor(show ? Color.white : Color.blue)
+            .font(.largeTitle)
+            .bold()
+            .scaleEffect(press ? 2 : 1)
+            .animation(.spring(response: 0.3, dampingFraction: 0.3))
+            .gesture(LongPressGesture(minimumDuration: 0.5)
+                .updating($press) { currentState, gestureState, transaction in
+                    gestureState = currentState
+                }
+                .onEnded { value in
+                    show.toggle()
+                }
+            )
     }
-
-
-struct PlayView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlayView()
+    
+    struct PlayView_Previews: PreviewProvider {
+        static var previews: some View {
+            PlayView()
+        }
     }
 }

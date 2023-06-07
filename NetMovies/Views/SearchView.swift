@@ -48,11 +48,11 @@ struct SearchView: View {
                                             .font(.custom("", size: 42))
                                             .foregroundColor(.white)
                                     }
-                                    
                                 }
                                 .frame(width: 360)
                             }
-                        }.padding()
+                            .padding(.init(.init(top: 0, leading: 30, bottom: 5, trailing: 30)))
+                        }
                     }
                 } else {
                     ScrollView() {

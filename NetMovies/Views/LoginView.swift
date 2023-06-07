@@ -56,11 +56,8 @@ struct LoginView: View {
 //                            .padding(.all, 30)
 //                    }
                     Button(action: {
-                        guard !email.isEmpty, !password.isEmpty else {
-                            return
-                        }
                         viewModel.signIn(email: email, password: password)
-//                        self.isSignedIn = true
+//                        isSignedIn = true
                     }) {
                         Text("Sign In")
                             .foregroundColor(.white)
@@ -74,21 +71,24 @@ struct LoginView: View {
                             
                     }
                     .padding(.top, 20)
-                    
-//                    NavigationLink(
-//                        destination: MainTabBarViewController(), isActive: $isSignedIn, label: { EmptyView() }
-//                    )
 
-                    NavigationLink(destination: SignupView()) {
-                        Text("New to NetMovies? Sign up now.")
+                    HStack {
+                        Text("New to NetMovies?")
                             .font(.system(size: 20, weight: .heavy, design: .serif))
                             .foregroundColor(.white.opacity(0.6))
-                            .underline()
-                            .padding(.all, 20)
+    //                        .underline()
+                            .padding(.top, 22)
+                        NavigationLink(destination: SignupView()) {
+                            Text("Sign up now.")
+                                .font(.system(size: 20, weight: .heavy, design: .serif))
+                                .foregroundColor(.white.opacity(0.6))
+                                .underline()
+                                .padding(.top, 22)
+                        }
                     }
                     
                     Text("Sign in is protected by Google reCAPTCHA\n              to ensure you're not a bot.")
-                        .padding(.init(.init(top: 0, leading: 10, bottom: 0, trailing: 10)))
+                        .padding(.init(.init(top: 15, leading: 10, bottom: 0, trailing: 10)))
                         .foregroundColor(.white.opacity(0.6))
                         .frame(width: 440)
                 }

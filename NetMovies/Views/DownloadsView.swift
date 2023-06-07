@@ -49,29 +49,15 @@ struct DownloadsView: View {
                         .padding(.init(.init(top: 0, leading: 34, bottom: 0, trailing: 34)))
                         .frame(width: 500)
                     }
-//                    .navigationBarTitle("Downloads")
-//                }
             }
             .navigationBarTitle("Downloads")
         }
         .preferredColorScheme(.dark)
         .onAppear {
             viewModel.fetchMovies()
-//            Model.getTrendingMovies()
-//            Model.getTrendingTvs()
-//            Model.getPopularMovies()
-//            Model.getUpcomingMovies()
-//            Model.getTopRatedMovies()
-//            print("savedMovie\(viewModel.savedMovies.count)")
         }
         .onChange(of: viewModel.savedMovies) { _ in
             viewModel.fetchMovies()
-//            print("savedMovie\(viewModel.savedMovies.count)")
-//            Model.getTrendingMovies()
-//            Model.getTrendingTvs()
-//            Model.getPopularMovies()
-//            Model.getUpcomingMovies()
-//            Model.getTopRatedMovies()
         }
         .badge(viewModel.savedMovies.count)
     }

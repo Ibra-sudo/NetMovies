@@ -42,8 +42,7 @@ struct TrailerWebView: View {
         }
         .onAppear{
             viewModel.getYoutubeMovie(with: model.title)
-//            performBackgroundWork(WKWebView())
-            print("videoIdView \(viewModel.youtubeTitle.id.videoId)")
+//            print("videoIdView \(viewModel.youtubeTitle.id.videoId)")
         }
     }
 }
@@ -54,19 +53,12 @@ struct WebView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView()
-//        webView.navigationDelegate = context.coordinator
-                
         return webView
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
+        
         DispatchQueue.global().async {
-//            guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else {return}
-//            uiView.scrollView.isScrollEnabled = false
-//            uiView.load(URLRequest(url: youtubeURL))
-//            Thread.sleep(forTimeInterval: 1)
-            
-            
             DispatchQueue.main.async {
                 guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else {return}
                 uiView.scrollView.isScrollEnabled = false
@@ -74,25 +66,7 @@ struct WebView: UIViewRepresentable {
             }
         }
     }
-
 }
-//var videoId: String = ""
-//func performBackgroundWork(_ uiView: WKWebView) {
-//
-//    DispatchQueue.global().async {
-////        let videoId: String
-//        Thread.sleep(forTimeInterval: 1)
-//
-//        DispatchQueue.main.async {
-//
-//            guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else {return}
-//            uiView.scrollView.isScrollEnabled = false
-//            uiView.load(URLRequest(url: youtubeURL))
-//        }
-//    }
-//}
-    
-
 
 //https://youtube.com/watch?v=\(videoID)
 

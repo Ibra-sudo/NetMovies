@@ -128,7 +128,7 @@ struct HeaderView: View {
         }
         .onAppear{
 //            viewModel.fetchImages(with: model.title)
-            print("view\(viewModel.images.count)")
+//            print("view\(viewModel.images.count)")
         }
         
 //            .frame(height: 700)
